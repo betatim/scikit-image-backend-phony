@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.entry-points."skimage.backends"]
+# This entrypoint points to the actual implementations
+# and can be slow to import
+implementations = "scikit_image_backend_phony.implementations"
+
+# This entrypoint only provides information about
+# the backend and has to be fast to implement
+information = "scikit_image_backend_phony.information:info"
+
+[project]
+name = "scikit-image-backend-phony"
+version = "0.0.1"
