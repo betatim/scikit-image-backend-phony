@@ -2,14 +2,20 @@
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
-[project.entry-points."skimage.backends"]
+[project.entry-points.skimage_backends]
 # This entrypoint points to the actual implementations
-# and can be slow to import
-implementations = "scikit_image_backend_phony.implementations"
+# and can be slow to import. The namespace it points
+# to has to match the scikit-image namespace. This is
+# how implementations are located by the dispatching
+# mechanism.
+phony = "scikit_image_backend_phony.implementations"
 
+[project.entry-points.skimage_backend_infos]
 # This entrypoint only provides information about
-# the backend and has to be fast to implement
-information = "scikit_image_backend_phony.information:info"
+# the backend and has to be fast to call from the frontend
+# This means it should not perform a lot of computation
+# or trigger large imports
+phony = "scikit_image_backend_phony.information:info"
 
 [project]
 name = "scikit-image-backend-phony"
