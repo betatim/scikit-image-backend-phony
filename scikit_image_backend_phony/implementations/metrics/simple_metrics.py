@@ -1,10 +1,6 @@
 import numpy as np
 
 
-def can_has_mean_squared_error(image0, image1):
-    return True
-
-
 def mean_squared_error(image0, image1):
     """
     Compute the mean-squared error between two images.

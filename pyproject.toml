@@ -3,12 +3,13 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project.entry-points.skimage_backends]
-# This entrypoint points to a function that can retrieve
-# the actual implementation of a function given its name.
-# It can be slow to import.
-# This is how implementations are located by the dispatching
-# mechanism.
-phony = "scikit_image_backend_phony.implementations:get"
+# This entrypoint points to a namespace that contains two functions.
+# The `get_implementation` function is how implementations are located by the
+# dispatching mechanism.
+# The `can_has` function is used by the dispatching mechanism to find a
+# suitable backend by querying each in turn.
+# The entrypoint may be slow to import.
+phony = "scikit_image_backend_phony.implementations"
 
 [project.entry-points.skimage_backend_infos]
 # This entrypoint only provides information about
