@@ -13,6 +13,8 @@ def get_implementation(name):
     If the backend does not contain an implementation then this function should
     return `None`.
     """
+    # Remove the leading `skimage.`
+    _, name = name.split(".", maxsplit=1)
     module_name, func_name = name.rsplit(".", maxsplit=1)
 
     try:
