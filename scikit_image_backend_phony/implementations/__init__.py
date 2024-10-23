@@ -15,7 +15,7 @@ def get_implementation(name):
     """
     # Remove the leading `skimage.`
     _, name = name.split(".", maxsplit=1)
-    module_name, func_name = name.rsplit(".", maxsplit=1)
+    module_name, func_name = name.rsplit(":", maxsplit=1)
 
     try:
         mod = importlib.import_module(
