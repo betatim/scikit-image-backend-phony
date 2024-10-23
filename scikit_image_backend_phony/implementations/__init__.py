@@ -10,19 +10,15 @@ def get_implementation(name):
     The returned function should have the same signature as the function that
     is being dispatched, raise the same exceptions, etc.
 
-    If the backend does not contain an implementation then this function should
-    return `None`.
+    If `can_has` returned True then this function has to return a function.
     """
     # Remove the leading `skimage.`
     _, name = name.split(".", maxsplit=1)
     module_name, func_name = name.rsplit(":", maxsplit=1)
 
-    try:
-        mod = importlib.import_module(
-            "scikit_image_backend_phony.implementations." + module_name
-        )
-    except ModuleNotFoundError as e:
-        return None
+    mod = importlib.import_module(
+        "scikit_image_backend_phony.implementations." + module_name
+    )
 
     func = getattr(mod, func_name, None)
 
@@ -41,4 +37,4 @@ def can_has(name, *args, **kwargs):
     as inspecting the types and shapes of the array arguments as well as
     the additional arguments.
     """
-    return True
+    return name == "skimage.metrics:mean_squared_error"
